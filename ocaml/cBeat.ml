@@ -18,7 +18,13 @@ let () = Url.def_beat begin fun req res ->
   let! json = req_or (fail "Expected JSON POST") (Action.Convenience.get_json req) in
   let! beat = req_or (fail "Invalid JSON format") (ArgFmt.of_json_safe json) in
   let  aid, secret = req # args in
-  (* TODO : check that aid + secret are valid *)
+
+  let! account = ohm_req_or (fail "Unknown account") (MAccount.get aid) in
+  let! () = true_or (fail "Invalid secret key") (secret = account.MAccount.secret) in
+  
+  let! time = ohmctx (#time) in
+  let! () = true_or (fail "Account expired") (MAccount.expired account time) in
+
   let! () = ohm (MBeat.push ~account:aid beat) in
   
   return (Action.json [ "status", Json.String "ok" ] res)
