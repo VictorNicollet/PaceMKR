@@ -11,7 +11,7 @@ type t = {
   payload  : Api.Post.t list ;
 }
 
-val push : account:IAccount.t -> Api.Post.t -> (#O.ctx,unit) Ohm.Run.t
+val push : account:IAccount.t -> Api.Post.t list -> (#O.ctx,unit) Ohm.Run.t
 
 val pop : unit -> (#O.ctx, t option) Ohm.Run.t
 
