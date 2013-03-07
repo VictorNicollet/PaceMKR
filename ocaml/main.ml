@@ -1,4 +1,4 @@
-(* © 2012 RunOrg *) 
+(* pacemkr © 2013 Victor Nicollet *)
 
 open Ohm
 open BatPervasives
@@ -8,6 +8,7 @@ module Controllers = struct
   open CHome
   open CBeat
   open CAccount
+  open CStart
 end
 
 let () = Random.self_init () 
