@@ -9,6 +9,8 @@ module Controllers = struct
   open CBeat
 end
 
+let () = Random.self_init () 
+
 module Main = Ohm.Main.Make(O.Reset)
 let _ = Main.run ~async:O.run_async O.role
 
