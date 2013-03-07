@@ -1,0 +1,12 @@
+.bot
+.fastcgi
+.ohm
+_build
+ocaml/_build
+ocaml/_tags
+ocaml/gen
+ocaml/main.byte
+ocaml/ohm
+server
+www/
+*~
