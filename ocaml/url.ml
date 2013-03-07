@@ -1,0 +1,8 @@
+(* pacemkr © 2013 Victor Nicollet *)
+
+open Ohm
+
+module A = Action.Args
+
+let home,    def_home    = O.declare "" A.none
+let account, def_account = O.declare "a" (A.r IAccount.arg) 
