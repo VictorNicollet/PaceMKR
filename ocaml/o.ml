@@ -21,7 +21,7 @@ let role = Util.role ()
 type environment = [ `Dev | `Prod ]
 
 (** The current {!type:environment}. *)
-let environment = `Dev 
+let environment = `Prod
 
 (** A string representing the current environment, which is then used to 
     construct various environment-dependent names and identifiers.
@@ -155,7 +155,7 @@ let run_async () =
 (** The domain on which the server should respond to requests. 
 *)
 let domain = match environment with 
-  | `Prod -> ConfigProject.lname ^ ".com"
+  | `Prod -> ConfigProject.lname ^ ".nicollet.net"
   | `Dev  -> ConfigProject.lname ^ ".local"
 
 (** The domain suffix on which cookies are published. 
