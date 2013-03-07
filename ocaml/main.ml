@@ -7,6 +7,7 @@ module Controllers = struct
   open CErrorPage
   open CHome
   open CBeat
+  open CAccount
 end
 
 let () = Random.self_init () 
