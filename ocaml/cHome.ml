@@ -5,10 +5,8 @@ open Ohm.Universal
 
 let () = Url.def_home begin fun req res ->
 
-  let aid = IAccount.gen () in
-
   let! body = ohm $ Asset_Home_Page.render (object
-    method getStarted = Action.url Url.account () aid 
+    method getStarted = Action.url Url.start () () 
   end) in
 
   let title = "pacemkr - monitor your heartbeats" in
