@@ -6,3 +6,6 @@ module A = Action.Args
 
 let home,    def_home    = O.declare "" A.none
 let account, def_account = O.declare "a" (A.r IAccount.arg) 
+
+let beat,    def_beat    = O.declare "beat" (A.rr IAccount.arg A.string) 
+
