@@ -9,3 +9,4 @@
     in
     !! "This account will expire %s." duration 
 end
+| `Account_HereIsYourApiUrl -> "Hello ! Here is your very own private API URL:"

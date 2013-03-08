@@ -1,2 +1,59 @@
-<div>{`Account_Expires expire}</div>
-<code>{apiUrl}</code>
+<div id="account">
+  <div class="expire">{`Account_Expires expire}</div>
+  <div class="logo">pacemkr</div>
+  <div class="page">
+    <p style="margin-top: 0px">
+      {`Account_HereIsYourApiUrl}
+    </p>
+    <div class="api-url">
+      <input type="text" readonly="readonly" value="{apiUrl}"/>
+    </div>
+  </div>
+</div>
+
+<style>
+#account {
+  max-width: 900px;
+  min-width: 400px;
+  margin: auto;
+  color: #333;
+  overflow: hidden; 
+  padding: 0 5px;
+  .logo {
+    color: #111;
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 24px;
+    margin: 15px 0 20px;
+    height: 30px;
+  }
+  .expire {
+    float: right;
+    line-height: 30px;
+    color: #666;    
+    margin: 15px 0 20px;
+    height: 30px;
+    font-size: 12px;
+  }
+  .page {
+    padding: 15px;
+    margin: 20px 0 30px;
+    background-color: white;
+    border: 1px solid #CCC;
+    box-shadow: 0 0 3px #AAA;
+  }
+  .api-url {
+    overflow: hidden;
+    border: 1px solid #888;
+    padding: 3px;
+    margin: 2px 10px;
+    input {
+      border: 0px;
+      color: #555;
+      display: block;
+      font-family: monospace;
+      width: 1000px;
+    }
+  }
+}
+</style>
