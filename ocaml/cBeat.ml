@@ -37,7 +37,7 @@ let () = Url.def_beat begin fun req res ->
   let! () = true_or (fail "Invalid secret key") (secret = account.MAccount.secret) in
   
   let! time = ohmctx (#time) in
-  let! () = true_or (fail "Account expired") (MAccount.expired account time) in
+  let! () = true_or (fail "Account expired") (not (MAccount.expired account time)) in
 
   let! () = ohm (MBeat.push ~account:aid beat) in
   
