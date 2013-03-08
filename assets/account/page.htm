@@ -23,7 +23,7 @@
 	  <tr>
 	    <td class=status>{if alive}{if longer}<div class=dying></div>{else}<div class=alive></div>{/if}{else}<div class=dead></div>{/if}</td>
 	    <td class=last>{`Account_LastSeen last}</td>	      
-	    <td>{?name}{this}{else}{`Account_DefaultId}{/?}</td>
+	    <td>{?name}{this}{else}<span class=none>{`Account_DefaultId}</span>{/?}</td>
 	  </tr>
 	{/#}
       {/#}    
@@ -148,6 +148,7 @@
       width: 120px;
       padding: 0 20px;
     }
+    .none { color : #888 ; font-size: 12px; }
   }
 }
 </style>
