@@ -93,3 +93,30 @@ let () =
     return None
   end 
 
+(* Updating items by applying their "next update" time -------- *)
+
+module ByNextTime = CouchDB.DocView(struct
+  module Key = Fmt.Float
+  module Value = Fmt.Unit
+  module Doc = Data
+  module Design = Design
+  let name = "by_next_time"
+  let map = "if (doc.alive && doc.alert) emit(doc.alert + doc.last)"
+end)
+
+let kill now id = 
+  Tbl.update id begin fun item ->
+    match item.alert with None -> item | Some duration -> 
+      if item.last +. duration < now then { item with alive = false } else item
+  end 
+
+let () =  
+  O.async # periodic 1 begin 
+    let! now = ohmctx (#time) in
+    let! next = ohm (ByNextTime.doc_query ~limit:1 ~endkey:now ()) in
+    match next with [] -> return (Some 2.0) | kvd :: _ ->
+      let id = IItem.of_id (kvd # id) in
+      let! () = ohm $ kill now id in
+      return None
+  end 
+
