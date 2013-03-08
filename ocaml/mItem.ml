@@ -79,6 +79,7 @@ let seconds minutes =
 
 let () = 
   O.async # periodic 1 begin 
+    let! () = ohm $ return () in
     let! next = ohm_req_or (return (Some 2.0)) (MBeat.pop ()) in
     let! () = ohm $ Run.list_iter begin fun post ->
       register_heartbeat 
