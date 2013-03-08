@@ -15,9 +15,13 @@ let () = Url.def_account begin fun req res ->
   let  aid = req # args in
   let! account = ohm_req_or (missing res) (MAccount.get aid) in
 
+  let! now = ohmctx (#time) in
+  let  expire = now, MAccount.expires account in
+
   let! title = ohm $ AdLib.get `Common_Title in 
   let! body  = ohm $ Asset_Account_Page.render (object
     method apiUrl = Action.url Url.beat () (aid, account.MAccount.secret)
+    method expire = expire
   end) in  
 
   return $ Action.page (O.page ~title body) res 
