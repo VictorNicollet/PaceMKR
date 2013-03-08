@@ -8,6 +8,35 @@
     <div class="api-url">
       <input type="text" readonly="readonly" value="{apiUrl}"/>
     </div>
+    <p>
+      {`Account_ExampleUsage}
+    </p>
+    <pre><div class=src>/path/to/heartbeat
+</div><span class=light>#!/bin/sh</span>
+<br/><span class=comment>
+<br/># {`Account_ExampleComment}
+<br/># {`Account_ExampleComment2}</span>
+<br/>
+<br/>curl \
+<br/>&nbsp;&nbsp;-X POST \
+<br/>&nbsp;&nbsp;-H 'Content-type: application/json' \
+<br/>&nbsp;&nbsp;-d '[&#123;<span class=string>"nature"</span>:<span class=string>"Server"</span>,<span class=string>"alert"</span>:<span class=atom>13</span>&#125;]' \
+<br/>&nbsp;&nbsp;{apiUrl}       
+    </pre>
+    <p>
+      {`Account_ExampleTest}
+    </p>
+    <pre><span class=light>$</span> chmod a+x /path/to/heartbeat
+<br/><span class=light>$</span> /path/to/heartbeat
+<br/><span class=comment>&#123;"status":"ok"&#125;</span>
+    </pre>
+    <p>
+      {`Account_ExampleCrontab}
+    </p>
+    <pre><div class=src>crontab -e</div><span class=light>*/5 * * * *</span> /path/to/heartbeat &gt; /dev/null</pre>
+    <p>
+      {`Account_RefreshWhenReady}
+    </p>
   </div>
 </div>
 
@@ -36,7 +65,7 @@
     font-size: 12px;
   }
   .page {
-    padding: 15px;
+    padding: 30px;
     margin: 20px 0 30px;
     background-color: white;
     border: 1px solid #CCC;
