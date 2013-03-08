@@ -2,12 +2,19 @@
   <div class="expire">{`Account_Expires expire}</div>
   <div class="logo">pacemkr</div>
   <div class="page">
+
+    {?dashboard}{else}
     <p style="margin-top: 0px">
       {`Account_HereIsYourApiUrl}
     </p>
+    {/?}
+
     <div class="api-url">
       <input type="text" readonly="readonly" value="{apiUrl}"/>
     </div>
+    
+    {?dashboard}
+    {else}
     <p>
       {`Account_ExampleUsage}
     </p>
@@ -37,6 +44,8 @@
     <p>
       {`Account_RefreshWhenReady}
     </p>
+    {/?}
+
   </div>
 </div>
 

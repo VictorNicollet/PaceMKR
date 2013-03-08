@@ -22,6 +22,7 @@ let () = Url.def_account begin fun req res ->
   let! body  = ohm $ Asset_Account_Page.render (object
     method apiUrl = Action.url Url.beat () (aid, account.MAccount.secret)
     method expire = expire
+    method dashboard = None
   end) in  
 
   return $ Action.page (O.page ~title body) res 
