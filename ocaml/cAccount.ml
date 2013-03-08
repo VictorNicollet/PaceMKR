@@ -11,6 +11,15 @@ let missing res =
   return $ Action.page page res
 
 let () = Url.def_account begin fun req res -> 
+
   let  aid = req # args in
-  missing res
+  let! account = ohm_req_or (missing res) (MAccount.get aid) in
+
+  let! title = ohm $ AdLib.get `Common_Title in 
+  let! body  = ohm $ Asset_Account_Page.render (object
+    method apiUrl = Action.url Url.beat () (aid, account.MAccount.secret)
+  end) in  
+
+  return $ Action.page (O.page ~title body) res 
+
 end 
