@@ -9,7 +9,7 @@ let () = Url.def_home begin fun req res ->
     method getStarted = Action.url Url.start () () 
   end) in
 
-  let title = "pacemkr - monitor your heartbeats" in
+  let! title = ohm $ AdLib.get `Common_Title in
 
   return (Action.page (O.page ~title body) res)
 
