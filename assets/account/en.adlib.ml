@@ -16,3 +16,13 @@ end
 | `Account_ExampleTest -> "Always test the heartbeat script manually at least once."
 | `Account_ExampleCrontab -> "Then, make sure that the heartbeat is sent at regular intervals, such as every five minutes." 
 | `Account_RefreshWhenReady -> "When you're done, refresh this page to see your server status."
+
+| `Account_LastSeen (last, now) -> begin 
+  let diff = int_of_float (now -. last) in
+  if diff < 60 then card "Now" "One second ago" (!! "%d seconds ago") diff else
+    let diff = diff / 60 in
+    if diff < 60 then card "Seconds ago" "One minute ago" (!! "%d minutes ago") diff else
+      if diff < 120 then "An hour ago" else "Hours ago"
+end
+
+| `Account_DefaultId -> "(no identifier provided)"

@@ -9,6 +9,7 @@ module Controllers = struct
   open CBeat
   open CAccount
   open CStart
+  open MItem
 end
 
 let () = Random.self_init () 

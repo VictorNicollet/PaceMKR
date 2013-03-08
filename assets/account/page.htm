@@ -14,6 +14,20 @@
     </div>
     
     {?dashboard}
+      <table>
+      {#this}
+        <tr>
+	  <td class=nature colspan=3><h2>{name}</h2></td>
+	</tr>
+	{#items}
+	  <tr>
+	    <td class=status>{if alive}{if longer}<div class=dying></div>{else}<div class=alive></div>{/if}{else}<div class=dead></div>{/if}</td>
+	    <td class=last>{`Account_LastSeen last}</td>	      
+	    <td>{?name}{this}{else}{`Account_DefaultId}{/?}</td>
+	  </tr>
+	{/#}
+      {/#}    
+      </table>
     {else}
     <p>
       {`Account_ExampleUsage}
@@ -91,6 +105,48 @@
       display: block;
       font-family: monospace;
       width: 1000px;
+    }
+  }
+
+  table {
+    border-collapse: collapse;
+    margin: 20px 0 0;
+    width: 100%;
+    td { padding: 4px 8px; border-bottom: 1px solid #CCC; }
+    td.nature {
+      border-bottom: 1px solid #888;
+      h2 { margin: 10px 0 0 0; }
+    }
+    td.status {      
+      width: 26px;
+      div {
+        height: 18px;
+        width: 18px;
+        border-radius: 28px;
+        margin: 4px;
+        box-shadow: 0 0 3px #888;      
+        &.alive {
+          background-color: #4C4;
+          border: 1px solid #080;
+          box-shadow: inset 0 0 10px #2A2;
+        }
+        &.dead {
+          background-color: #C44;
+          border: 1px solid #800;
+          box-shadow: inset 0 0 10px #A22;
+        }
+        &.dying {
+          background-color: #BBB;
+          border: 1px solid #555;
+          box-shadow: inset 0 0 10px #888;
+        }
+      }
+    }
+    td.last {
+      font-size: 12px;
+      color: #666;
+      width: 120px;
+      padding: 0 20px;
     }
   }
 }
