@@ -55,3 +55,10 @@ let () = Url.def_account begin fun req res ->
   return $ Action.page (O.page ~title body) res 
 
 end 
+
+let () = Url.def_clean begin fun req res -> 
+  let aid, nature = req # args in 
+  let! () = ohm $ MItem.clean aid nature in
+  let url = Action.url Url.account () aid in 
+  return $ Action.redirect url res
+end
