@@ -113,7 +113,13 @@
     border-collapse: collapse;
     margin: 20px 0 0;
     width: 100%;
-    td { padding: 4px 8px; border-bottom: 1px solid #CCC; }
+    td { 
+      padding: 4px 8px; 
+      border-bottom: 1px solid #CCC;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+    }
     td.nature {
       border-bottom: 1px solid #888;
       h2 { margin: 10px 0 0 0; }
