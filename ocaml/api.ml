@@ -9,6 +9,7 @@ module Post = struct
      ?id      : string option ; 
      ?alert   : int option ;    
      ?minimum : int option ;
+     ?detail  : string option ; 
     }
   end
   include T
