@@ -135,3 +135,26 @@ let expect t =
   let maximum = 600.0 in (* The maximum "bonus" is ten minutes. *)
   let bonus = min maximum t.expect in
   max minimum (bonus +. t.expect) 
+
+(* Cleaning up items by nature -------------------------------- *)
+
+module ByNature = CouchDB.DocView(struct
+  module Key = Fmt.Make(struct type json t = (IAccount.t * INature.t) end)
+  module Value = Fmt.Unit
+  module Doc = Data
+  module Design = Design
+  let name = "by_nature"
+  let map = "emit([doc.aid,doc.nature])"
+end)
+
+let clean aid nid = 
+  let! now  = ohmctx (#time) in
+  let! list = ohm $ ByNature.doc (aid,nid) in
+  Run.list_iter begin fun x -> 
+    let iid  = IItem.of_id (x # id) in
+    let item = x # doc in
+    if not item.alive || item.last +. expect item > now then
+      Tbl.delete iid 
+    else
+      return () 
+  end list
