@@ -4,7 +4,9 @@ type t = {
   alive  : bool ;
   aid    : IAccount.t ;
   nature : string ;
+  detail : string option ; 
   id     : string option ; 
+  first  : float ; 
   last   : float ; 
   alert  : float option ; 
   min    : int option ; 
@@ -13,3 +15,4 @@ type t = {
 
 val all : IAccount.t -> (#O.ctx, t list) Ohm.Run.t 
 
+val uptime : t -> float 

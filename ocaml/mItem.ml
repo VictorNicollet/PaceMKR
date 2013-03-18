@@ -9,7 +9,9 @@ module Data = struct
       alive  : bool ;
       aid    : IAccount.t ;
       nature : string ;
+     ?detail : string option ; 
       id     : string option ; 
+     ?first  : float = 0.0 ;
       last   : float ; 
       alert  : float option ; 
       min    : int option ; 
@@ -26,7 +28,9 @@ type t = Data.t = {
   alive  : bool ;
   aid    : IAccount.t ;
   nature : string ;
-  id     : string option ; 
+  detail : string option ;
+  id     : string option ;
+  first  : float ; 
   last   : float ; 
   alert  : float option ; 
   min    : int option ; 
@@ -50,24 +54,26 @@ let all aid =
 
 (* Updating items by polling the heartbeats -------- *)
 
-let register_heartbeat ~nature ?id ?alert ?min ~last aid = 
+let register_heartbeat ~nature ?detail ?id ?alert ?min ~last aid = 
 
-  let default expect = { 
+  let default first expect = { 
     alive = true ;
     aid   ;
     nature ;
+    detail ; 
     id ; 
     alert ;
     min ; 
+    first = BatOption.default last first ; 
     last ;
     expect ; 
   } in
 
   let update = function 
-    | None -> default (5. *. 60.)
+    | None -> default None (5. *. 60.)
     | Some current -> if current.last >= last then current else 
 	let expect = 0.1 *. (last -. current.last) +. 0.9 *. current.expect in 
-	default expect
+	default (Some current.first) expect
   in
 
   let iid = IItem.make ~nature ?id aid in
@@ -84,6 +90,7 @@ let () =
     let! () = ohm $ Run.list_iter begin fun post ->
       register_heartbeat 
 	~nature:post.Api.Post.nature
+	?detail:post.Api.Post.detail
 	?id:post.Api.Post.id
 	?alert:(BatOption.map seconds post.Api.Post.alert)
 	?min:post.Api.Post.minimum
@@ -120,3 +127,5 @@ let () =
       return None
   end 
 
+let uptime t = 
+  t.last -. t.first 
