@@ -25,7 +25,7 @@ let render_nature now items nature =
 	 (List.filter (fun i -> i.MItem.nature = nature) items))
   in
   (object 
-    method name  = nature
+    method name  = INature.to_string nature
     method items = list
    end)
 

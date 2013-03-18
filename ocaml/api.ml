@@ -5,7 +5,7 @@ open Ohm
 module Post = struct
   module T = struct
     type json t = {
-      nature  : string ;
+      nature  : INature.t ;
      ?id      : string option ; 
      ?alert   : int option ;    
      ?minimum : int option ;

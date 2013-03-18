@@ -8,7 +8,7 @@ module Data = struct
     type json t = {
       alive  : bool ;
       aid    : IAccount.t ;
-      nature : string ;
+      nature : INature.t ;
      ?detail : string option ; 
       id     : string option ; 
      ?first  : float = 0.0 ;
@@ -27,7 +27,7 @@ include CouchDB.Convenience.Table(struct let db = O.db "item" end)(IItem)(Data)
 type t = Data.t = {
   alive  : bool ;
   aid    : IAccount.t ;
-  nature : string ;
+  nature : INature.t ;
   detail : string option ;
   id     : string option ;
   first  : float ; 

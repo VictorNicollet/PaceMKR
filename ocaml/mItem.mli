@@ -3,7 +3,7 @@
 type t = {
   alive  : bool ;
   aid    : IAccount.t ;
-  nature : string ;
+  nature : INature.t ;
   detail : string option ; 
   id     : string option ; 
   first  : float ; 

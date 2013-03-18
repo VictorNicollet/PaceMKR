@@ -7,7 +7,7 @@ open BatPervasives
 include Ohm.Id.Phantom
 
 let make ~nature ?(id="") aid = 
-  Printf.sprintf "%S%S" nature id
+  Printf.sprintf "%S%S" (INature.to_string nature) id
   |> Digest.string
   |> Digest.to_hex
   |> (fun s -> String.sub s 0 13) 
