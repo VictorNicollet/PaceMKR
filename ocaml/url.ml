@@ -10,3 +10,4 @@ let account, def_account = O.declare "a" (A.r IAccount.arg)
 
 let beat,    def_beat    = O.declare "beat" (A.rr IAccount.arg A.string) 
 
+let clean,   def_clean   = O.declare "clean" (A.rr IAccount.arg INature.arg) 

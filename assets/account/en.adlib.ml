@@ -26,3 +26,5 @@ end
 end
 
 | `Account_DefaultId -> "(no identifier provided)"
+
+| `Account_Clean -> "Delete inactive"

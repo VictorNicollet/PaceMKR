@@ -8,3 +8,4 @@
 | `Account_RefreshWhenReady 
 | `Account_LastSeen of (float * float)
 | `Account_DefaultId
+| `Account_Clean

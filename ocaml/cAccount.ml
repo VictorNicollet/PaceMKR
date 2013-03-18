@@ -18,7 +18,7 @@ let render_item now item = (object
   method detail = item.MItem.detail
 end)
 
-let render_nature now items nature = 
+let render_nature aid now items nature = 
   let list = 
     List.map (render_item now) 
       (List.sort (fun a b -> compare b.MItem.last a.MItem.last)
@@ -27,11 +27,12 @@ let render_nature now items nature =
   (object 
     method name  = INature.to_string nature
     method items = list
+    method clean = Action.url Url.clean () (aid, nature) 
    end)
 
-let render now items = 
+let render aid now items = 
   let natures = BatList.sort_unique compare (List.map (fun i -> i.MItem.nature) items) in
-  List.map (render_nature now items) natures
+  List.map (render_nature aid now items) natures
 
 let () = Url.def_account begin fun req res -> 
 
@@ -42,7 +43,7 @@ let () = Url.def_account begin fun req res ->
   let  expire = now, MAccount.expires account in
 
   let! items = ohm $ MItem.all aid in 
-  let  dashboard = if items = [] then None else Some (render now items) in
+  let  dashboard = if items = [] then None else Some (render aid now items) in
 
   let! title = ohm $ AdLib.get `Common_Title in 
   let! body  = ohm $ Asset_Account_Page.render (object

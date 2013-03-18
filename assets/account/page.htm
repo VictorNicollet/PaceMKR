@@ -17,7 +17,12 @@
       <table>
       {#this}
         <tr>
-	  <td class=nature colspan=4><h2>{name}</h2></td>
+	  <td class=nature colspan=4>
+	    <form action="{clean}" method="POST">
+	      <button class=clean type="submit">{`Account_Clean}</button>
+	    </form>
+	    <h2>{name}</h2>
+	  </td>
 	</tr>
 	{#items}
 	  <tr>
@@ -106,6 +111,20 @@
       display: block;
       font-family: monospace;
       width: 1000px;
+    }
+  }
+
+  button.clean {
+    border: none; 
+    background-color: transparent; 
+    float: right; 
+    color: #888;
+    padding: 0;
+    margin: 27px 0 0 0;
+    cursor: pointer;
+    &:hover { 
+      text-decoration: underline;
+      color: #AAA; 
     }
   }
 
