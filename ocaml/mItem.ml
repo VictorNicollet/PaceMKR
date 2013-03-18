@@ -136,6 +136,9 @@ let expect t =
   let bonus = min maximum t.expect in
   max minimum (bonus +. t.expect) 
 
+let expired item now = 
+  item.last +. expect item < now
+
 (* Cleaning up items by nature -------------------------------- *)
 
 module ByNature = CouchDB.DocView(struct
@@ -153,7 +156,7 @@ let clean aid nid =
   Run.list_iter begin fun x -> 
     let iid  = IItem.of_id (x # id) in
     let item = x # doc in
-    if not item.alive || item.last +. expect item > now then
+    if not item.alive || expired item now then
       Tbl.delete iid 
     else
       return () 
