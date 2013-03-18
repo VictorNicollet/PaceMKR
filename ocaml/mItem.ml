@@ -129,3 +129,9 @@ let () =
 
 let uptime t = 
   t.last -. t.first 
+
+let expect t = 
+  let minimum = 60.0  in (* Our lowest resolution is one minute *)
+  let maximum = 600.0 in (* The maximum "bonus" is ten minutes. *)
+  let bonus = min maximum t.expect in
+  max minimum (bonus +. t.expect) 

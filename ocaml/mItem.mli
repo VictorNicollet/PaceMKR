@@ -16,3 +16,8 @@ type t = {
 val all : IAccount.t -> (#O.ctx, t list) Ohm.Run.t 
 
 val uptime : t -> float 
+
+(** When is a given item expected to ping again ? 
+    After this duration has elapsed, the item will turn grey. 
+*)
+val expect : t -> float
