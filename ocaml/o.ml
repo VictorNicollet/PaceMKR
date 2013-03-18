@@ -155,7 +155,7 @@ let run_async () =
 (** The domain on which the server should respond to requests. 
 *)
 let domain = match environment with 
-  | `Prod -> ConfigProject.lname ^ ".nicollet.net"
+  | `Prod -> ConfigProject.lname ^ ".com"
   | `Dev  -> ConfigProject.lname ^ ".local"
 
 (** The domain suffix on which cookies are published. 
