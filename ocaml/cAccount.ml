@@ -15,6 +15,7 @@ let render_item now item = (object
   method last   = (item.MItem.last, now)
   method alive  = item.MItem.alive 
   method longer = item.MItem.last +. item.MItem.expect *. 2. < now 
+  method detail = item.MItem.detail
 end)
 
 let render_nature now items nature = 
